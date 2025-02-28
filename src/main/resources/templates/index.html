@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>CRM Система</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+<body>
+<div th:replace="layouts/navbar :: navbar"></div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 mb-3" th:each="request : ${requests}">
+            <div class="card p-3 shadow-sm">
+                <h5>
+                    <span th:unless="${request.handled}" class="text-danger fw-bold">*(Новая) </span>
+                    Заявка от <span th:text="${request.userName}"></span>
+                </h5>
+                <p><strong>Курс:</strong> <span th:text="${request.courses.name}"></span></p>
+                <p th:text="${request.commentary}"></p>
+                <p><strong>Тел:</strong> <span th:text="${request.phone}"></span></p>
+                <a th:href="@{'/details/' + ${request.getId()}}" class="text-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/js/bootstrap.bundle.js" type="text/javascript"></script>
+</html>
